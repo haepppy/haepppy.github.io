@@ -1,9 +1,11 @@
-title:              Clean Blog
-email:              your-email@example.com
+title:              Haeppy
+subtitle:           모든 기록
+email:              godls2213@naver.com
 description:        A Blog Theme by Start Bootstrap
 author:             Start Bootstrap
-baseurl:            "https://haepppy.github.io"
-url:                "https://haepppy.github.io"
+baseurl:            "https://haepppy.github.io/"
+url:                "https://haepppy.github.io/"
+
 
 # Social Profiles
 twitter_username:   SBootstrap
