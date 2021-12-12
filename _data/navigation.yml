@@ -2,10 +2,13 @@
 main:
   - title: "H"
     url: /
-  - title: "Day"
-    url: /day/
-  - title: "Study"
-    url: /study/
+  - title: "note"
+    url: /note/
+    children:
+      - title: "Day"
+        url: /day/
+      - title: "Study"
+        url: /study/
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"

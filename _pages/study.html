@@ -1,13 +1,14 @@
 ---
-layout: archive
+layout: category
 permalink: /study/
 title: "잊지 말아야 할 기록"
 author_profile: true
 ---
-{% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'"  %}
-{% for year in postsByYear %}
-  <h2 id="{{ year.name | slugify }}" class="archive__subtitle">{{ year.name }}</h2>
-  {% for post in year.items %}
+{% include group-by-array collection=site.posts field="categories" %}
+{% for category in group_names %}
+  {% assign posts = group_items[forloop.index0] %}
+  <h2 id="{{ category | slugify }}" class="archive__subtitle">{{ category }}</h2>
+  {% for post in posts %}
     {% include archive-single.html %}
   {% endfor %}
 {% endfor %}

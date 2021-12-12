@@ -1,9 +1,10 @@
 ---
 layout: category
-permalink: /day/
-title: "잊고 싶지 않은 기록"
+permalink: /note/
+title: "기록"
 author_profile: true
 ---
+
 {% include group-by-array collection=site.posts field="categories" %}
 {% for category in group_names %}
   {% assign posts = group_items[forloop.index0] %}
