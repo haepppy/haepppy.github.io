@@ -2,13 +2,29 @@
 main:
   - title: "H"
     url: /
-  - title: "note"
-    url: /note/
+  - title: "About"
+    url: /about/
+
+side:
+  - title: "Memo"
     children:
-      - title: "Day"
-        url: /day/
-      - title: "Study"
-        url: /study/
+      - title: "Diary"
+        url: categories/diary/
+  - title: "Study"
+    url: /study/
+    children:
+      - title: "HTML"
+        url: /html/
+        category: "html"
+      - title: "CSS"
+        url: /css/
+        category: "css"
+      - title: "Script"
+        url: /script/
+        category: "script"
+      - title: "Vanilla JS"
+        url: /vanilla-js/
+        category: "vanilla-js"
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"
