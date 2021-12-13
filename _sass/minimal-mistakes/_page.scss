@@ -330,13 +330,14 @@ body {
   margin-right: 5px;
   margin-bottom: 8px;
   padding: 5px 10px;
+  background: rgba(199, 223, 250, 0.3);
   text-decoration: none;
-  border: 1px solid mix(#000, $border-color, 25%);
   border-radius: $border-radius;
 
   &:hover {
     text-decoration: none;
     color: $link-color-hover;
+    background: rgba(199, 223, 250, 0.6);
   }
 }
 
@@ -562,4 +563,23 @@ body {
       padding-right: 0;
     }
   }
+}
+
+/* custom style */
+.highlight_yellow {
+  background: #fff599;
+}
+.highlight_blue {
+  background: #b9d7f1;
+}
+.highlight_gray {
+  background: #eaeaea;
+}
+.highlight_violet {
+  background: #dad6e7;
+}
+
+.circle {
+  border: 2px solid #ff6f61;
+  border-radius: 100%;
 }

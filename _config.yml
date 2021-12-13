@@ -291,7 +291,7 @@ defaults:
       read_time: false
       comments: # true
       share: false
-      related: true
+      related: false
       sidebar_main: true
       
     # _pages
@@ -301,3 +301,4 @@ defaults:
     values:
       layout: single
       author_profile: true
+      sidebar_main: true

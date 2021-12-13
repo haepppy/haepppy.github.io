@@ -7,23 +7,24 @@ main:
 
 side:
   - title: "Memo"
+    url: categories/memo/
     children:
       - title: "Diary"
         url: categories/diary/
   - title: "Study"
-    url: /study/
+    url: categories/study/
     children:
       - title: "HTML"
-        url: /html/
+        url: categories/html/
         category: "html"
       - title: "CSS"
-        url: /css/
+        url: categories/css/
         category: "css"
       - title: "Script"
-        url: /script/
+        url: categories/script/
         category: "script"
       - title: "Vanilla JS"
-        url: /vanilla-js/
+        url: categories/vanilla-js/
         category: "vanilla-js"
   # - title: "Sample Collections"
   #   url: /collection-archive/
