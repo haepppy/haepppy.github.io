@@ -8,7 +8,7 @@ sidebar:
     nav: "side"
 ---
 
-{% assign posts = site.categories.jekyll %}
+{% assign posts = site.categories.about %}
 {% for post in posts %}
   {% include custom-archive-single.html type=entries_layout %}
 {% endfor %}
