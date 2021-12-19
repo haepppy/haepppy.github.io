@@ -7,6 +7,7 @@ categories:
     - vanilla-js
 tags:
     - 인강 정리
+    - 기본 개념
 
 author_profile: true
 sidebar:
