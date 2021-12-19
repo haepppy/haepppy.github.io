@@ -1,6 +1,6 @@
 ---
 layout: archive
-permalink: categories/css
+permalink: categories/css/
 title: "CSS"
 
 author_profile: true

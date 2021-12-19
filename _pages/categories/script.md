@@ -1,6 +1,6 @@
 ---
 layout: archive
-permalink: categories/script
+permalink: categories/script/
 title: "Script"
 
 author_profile: true

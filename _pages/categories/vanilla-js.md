@@ -1,6 +1,6 @@
 ---
 layout: archive
-permalink: categories/vanilla-js
+permalink: categories/vanilla-js/
 title: "Vanilla JS"
 
 author_profile: true

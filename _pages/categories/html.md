@@ -1,6 +1,6 @@
 ---
 layout: archive
-permalink: categories/html
+permalink: categories/html/
 title: "HTML"
 
 author_profile: true

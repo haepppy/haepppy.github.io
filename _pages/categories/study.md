@@ -1,6 +1,6 @@
 ---
 layout: archive
-permalink: categories/study
+permalink: categories/study/
 title: "잊지 말아야 할 기록"
 
 author_profile: true
