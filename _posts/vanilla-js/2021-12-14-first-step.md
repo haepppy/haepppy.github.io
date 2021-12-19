@@ -77,7 +77,7 @@ console.log(a + " melody"); //btob melody 출력
 ```
 
 
-## 기본 3 - Booleans  
+## 기본 3 - Booleans 불린  
 - true와 false
     - true와 false는 값이다.  
 
@@ -104,7 +104,7 @@ console.log(a + " melody"); //btob melody 출력
     ```
 
 
-## 기본 4 - Arrays  
+## 기본 4 - Arrays 배열  
 - 배열 생성
     - 변수 생성에서 값에 대괄호`[]`만 묶어주면 됨.
     - n번쨰 변수를 불러올 때 순서는 0부터 셈.
@@ -158,7 +158,7 @@ player.birth = 0821;
 //생일값을 추가
 ```
 
-## 기본 6 - Function  
+## 기본 6 - Function 함수  
 - 함수 생성
 
 ```js
@@ -300,7 +300,7 @@ const calculator = {
 ```
 
 
-## 기본 8 - Conditionals
+## 기본 8 - Conditionals 조건문  
 
 
 

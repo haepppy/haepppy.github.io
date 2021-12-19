@@ -1,6 +1,6 @@
 ---
 layout: archive
-permalink: categories/diary
+permalink: categories/diary/
 title: "잊고 싶지 않은 기록"
 
 author_profile: true
