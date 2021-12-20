@@ -57,8 +57,8 @@
   p,
   li {
     font-family: $sans-serif;
-    font-size: $type-size-6;
-    line-height: 1.5;
+    font-size: .8em;
+    line-height: 1.6em;
   }
 
   img {
@@ -181,7 +181,7 @@
   margin: 0;
 
   @include breakpoint($large) {
-    margin-top: 10px;
+    margin-top: -5px;
     margin-bottom: 20px;
   }
 }

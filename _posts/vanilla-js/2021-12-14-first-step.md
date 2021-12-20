@@ -8,6 +8,7 @@ categories:
 tags:
     - 인강 정리
     - 기본 개념
+    - 자바스크립트 기본
 
 author_profile: true
 sidebar:
@@ -60,7 +61,7 @@ toc_sticky: true
     - 옛날 웹사이트에선 많이 볼 수 있지만 let을 우선으로 사용하는걸 권장함.
     - `var a = 0`
 
-## 기본 2 - 숫자열, 문자열  
+## 기본 2 - Number(숫자열), String(문자열)  
 - 숫자는 기본 작성, 문자열은 쌍따옴표를 사이에 두고 작성한다.  
 `let a = 0321;` : 숫자열 변수 지정  
 `let b = "btob";` : 문자열 변수 지정
@@ -76,6 +77,24 @@ let a = "btob";
 
 console.log(a + " melody"); //btob melody 출력
 ```
+
+---
+
+- 예를 들어 `console.log()`에 'typeof'를 추가하면 어떤 타입인지 확인할 수 있다.  
+
+```js
+const age = prompt("How old are you?");
+//prompt 창을 열어 사용자가 값을 입력할 수 있게 함.
+//여기서 입력된 값의 타입은 string임.
+
+console.log(typeof age);
+//string 출력
+```
+
+- String -> Number 변환하는 함수
+    - `parseInt()`
+    - 여기서 변환하려는 string이 숫자가 아닐 경우 NaN 출력.
+
 
 
 ## 기본 3 - Booleans 불린  
@@ -132,7 +151,7 @@ console.log(daysOfWeek);
 
 ```
 
-## 기본 5 - Object  
+## 기본 5 - Object 객체  
 - 배열과의 차이점은
     - 대괄호가 아닌 중괄호`{}`를 씀.
     - property가 존재함.
@@ -301,7 +320,76 @@ const calculator = {
 ```
 
 
-## 기본 8 - Conditionals 조건문  
+## 기본 8 - Conditionals 조건문 (if)  
+- if(_condition_)
+    - 괄호 안에 조건을 넣어 조건이 true일 경우 함수 진행
+- else
+    - 위 괄호 안에 조건이 false일 경우 진행할 함수 작성
+- else if (_condition_)
+    - 조건을 추기할 때 사용
+
+```js
+let age = parseInt( prompt("How old are you?") );
+
+ageCalc = function() {
+    if (isNaN(age)) { //괄호 안의 값이 true일 경우
+        alert("Please check your age");
+        age = parseInt (prompt("How old are you?") );
+        ageCalc();
+    } else { //false일 경우
+        if (age > 19) {
+            alert("You can drink!");
+        } else if (age < 20) {
+            alert("You can't drink!");
+        };
+    }; 
+};
+
+ageCalc();
+```
+
+- 괄호 안에 두가지 이상의 조건을 동시에 작성할 경우
+    - `&&`: 'and'의 의미를 지님.
+    - 두 조건 사이에 추가하며 두 조건이 모두 true여야 함.
+        - true `&&` true = true;
+        - true `&&` false = false;
+        - false `&&` true = false;
+        - false `&&` flase = false;
+    - `||`: 'or'의 의미를 지님.
+    - 두 조건 사이에 추가하며 두 조건 중 하나만 true여도 됨.
+        - true `||` true = true;
+        - true `||` false = true;
+        - false `||` true = true;
+        - false `||` flase = false;
+- 등호 연산자
+    - `=` : 값을 선언할 때 사용
+    - `==` : 값이 같음
+    - `===` : 값과 자료형이 모두 같음 (엄격)
+    - `!==` : 값이 같지 않음
+
+```js
+let age = parseInt( prompt("How old are you?") );
+
+ageCalc = function() {
+    if (isNaN(age) || age < 0) { //age 값이 NaN이거나 음수일 경우
+        alert("Please check your age");
+        age = parseInt (prompt("How old are you?") );
+        ageCalc();
+    } else if (age < 19) { //age 값이 19 미만일 경우
+        alert("You are too young!");
+    } else if (age >= 20 && age <= 50) { //age 값이 20 이상이면서 50 이하일 경우
+        alert("You can drink!");
+    } else if (age > 50 && age <= 80) { //age 값이 50 미만이면서 80 이상일 경우
+        alert("You should exercise!")
+    } else if(age === 100) { //age 값이 100일 경우 / 스크립트가 읽히는 순서가 있으니까 위치 중요
+        alert("WOW, You are wise!")
+    } else if (gae > 80) { //age 값이 80 초과인 경우
+        alert("You can do whatever you want!")
+    }
+}; 
+
+ageCalc();
+```
 
 
 
@@ -312,5 +400,5 @@ const calculator = {
 
 
 <br/>
-<a class="button1" href="https://nomadcoders.co/javascript-for-beginners/lobby" style="float: right; margin-right: 20px">강의 바로가기</a>
+<a class="button1" href="https://nomadcoders.co/javascript-for-beginners/lobby" style="float: right; margin-right: 20px" target="_blank">강의 바로가기</a>
 <br/>

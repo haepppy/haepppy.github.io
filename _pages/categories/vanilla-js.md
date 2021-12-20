@@ -8,6 +8,31 @@ sidebar_main: true
 sidebar:
     nav: "side"
 ---
+<style>
+    .archive {
+        position: relative;
+    }
+    .linkBtn {
+        position: absolute;
+        top: 0; right: 200px;
+    }
+    .linkBtn a {
+        display: block;
+        font-size: 14px;
+        padding: 0 15px;
+        background: #ddd;
+        color: #333;
+        box-sizing: border-box;
+    }
+    .linkBtn a:hover {
+        background: #bbb;
+    }
+</style>
+
+<div class="linkBtn">
+    <a href="https://nomadcoders.co/javascript-for-beginners/lobby">강의 바로가기</a>
+</div>
 
 {% assign posts = site.categories.vanilla-js %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}
+

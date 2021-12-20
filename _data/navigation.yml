@@ -4,6 +4,8 @@ main:
     url: /
   - title: "About"
     url: /about/
+  - title: "Category"
+    url: /category/
 
 side:
   - title: "Memo"
