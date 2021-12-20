@@ -8,7 +8,7 @@ categories:
 tags:
     - 인강 정리
     - 기본 개념
-    - 자바스크립트와 HTML
+    - 자바 스크립트와 HTML
 
 author_profile: true
 sidebar:
@@ -34,4 +34,68 @@ document.title = "hi"
 //HTML의 title이 hi로 수정됨
 ```
 
-## HTML in 자바스크립트  
+## 자바스크립트에서 HTML 요소 불러오기  
+자바스크립트에서 더 구체적으로 한가지 혹은 여러개의 HTML 요소들을 선택해 불러올 수 있다.  
+
+### id 선택자  
+- `document.getElementById("##")`
+  - HTML에서 "##" 아이디를 가진 요소를 불러온다.
+
+```html
+<h1 id="title">Grab me!</h2>
+
+<script>
+
+  let title = document.getElementById("title");
+  //html에서 아이디가 title인 요소를 변수 title에 저장
+
+  title.innerText = "Got you!"
+  //h2 태그 텍스트 "Geab me!"를 "Got you!"로 변경
+
+</script>
+```
+
+### class 선택자  
+- `document.getElementByClassName("..")`
+  - HTML에서 ".." 클래스를 가진 요소를 불러온다.
+
+```html
+<h1 class="hello">Grab me!</h2>
+
+<script>
+
+  let helloClass = document.getElementByClassName("hello");
+  //html에서 클래스가 hello인 요소를 변수 helloClass에 저장
+
+  helloClass.innerText = "Got you!"
+  //h2 태그 텍스트 "Geab me!"를 "Got you!"로 변경
+
+</script>
+```
+
+### css 선택자⭐  
+- ⭐`document.querySelector("~~")`
+  - <span class="highlight_yellow">가장 유용하고 자주 쓰이는 방식!</span>
+  - HTMl에서 가져올 요소를 css 선택자로 선택해서 불러온다. (첫번째 요소)
+- `document.querySelctorAll("~~")`
+  - 괄호 안에 선택자와 일치하는 요소들의 배열을 불러온다. (모든 요소)
+
+```html
+<div class="title">
+  <h1 >Grab me!</h2>
+</div>
+
+<script>
+
+  let title = document.querySelector(".title h1")
+  //html에서 title 클래스 아래에 있는 h2 태그 요소를 변수 title에 저장
+
+  helloClass.innerText = "Got you!"
+  //h2 태그 텍스트 "Geab me!"를 "Got you!"로 변경
+
+</script>
+```
+
+- 자바스크립트에서 html의 object properties를 보는 방법
+  - `console.dir(title);` -> 콘솔창에서 확인 가능!
+

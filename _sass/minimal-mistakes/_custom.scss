@@ -1,19 +1,22 @@
-/* custom header */
+/* custom masthead */
 .custom-header {
     width: 100%; height: calc(100vh - 71px);
-    background: #000;
+    background: linear-gradient(
+        15deg, #141927, #1b2835, #18344f, #20405f);
     position: relative;
+    background-size: cover;
 }
 
 .custom-header > p {
     width: fit-content;
     position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-46%, -50%);
+    top: 50%; left: 55%;
+    transform: translate(-50%, -50%);
     color: #fff;
+    text-shadow: 0 0px 10px rgba(0,0,0,0.5);
     margin: 0;
-    font-size: 7em;
-    letter-spacing: 150px;
+    font-size: 30px;
+    letter-spacing: 170px;
     text-align: center;
     vertical-align: middle;
 }
