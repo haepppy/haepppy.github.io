@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/project1-style.css">
+    <title>Project-1</title>
+</head>
+<body>
+    <div id="wrap">
+        <div class="topBox">
+            <div class="inBoxArea">
+                <h2 id="date"></h2>
+                <h2 id="clock" class="colorT">00:00</h2>
+        
+                <form id="login-form" class="hidden">
+                    <input   
+                    required 
+                    maxlength="15" 
+                    type="text" 
+                    placeholder="What is your name?" />
+    
+                    <input type="submit" value="Log In" />
+                </form>
+    
+                <h1 id="greeting" class="hidden"></h1>
+            </div>
+        </div>
+    
+        <div class="topBox">
+            <div class="inBoxArea">
+                <h2 class="todo_title colorT">To Do List</h2>
+                <form id="todo-form">
+                    <input type="text" placeholder="Write a To Do and Press Enter" required />
+                </form>
+                <ul id="todo-list"></ul>
+            </div>
+        </div>
+    
+        <div class="bottomBox colorBg">
+            <div id="weather">
+                <span></span>
+                <span></span>
+            </div>
+
+            <div id="quote">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    
+    
+        <script src="/assets/js/project1/clock.js"></script>
+        <script src="/assets/js/project1/greetings.js"></script>
+        <script src="/assets/js/project1/quotes.js"></script>
+        <!-- <script src="/js/background.js"></script> -->
+        <script src="/assets/js/project1/todo.js"></script>
+        <script src="/assets/js/project1/weather.js"></script>
+</body>
+</html>
