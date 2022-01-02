@@ -143,6 +143,8 @@ form#login-form input:first-child:focus::placeholder {
 }
 
 form#login-form input:last-child {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
     width: 50%;
     background: #fff;
     margin-top: 10px;
@@ -337,7 +339,7 @@ form#login-form input:last-child:hover {
 }
 #todo-list li input[type="checkbox"]:checked + label .checkBox {
     background: var(--main-color);
-    background-image: url(../images/checked.svg);
+    background-image: url(/assets/images/checked.svg);
 }
 
 #todo-list li input[type="checkbox"] + label span:last-child {
@@ -385,7 +387,7 @@ form#login-form input:last-child:hover {
         width: 16px; height: 16px;
         background: var(--main-color);
         border-radius: 4px;
-        background-image: url(/images/delete\ all\ icon.svg);
+        background-image: url(/assets/images/delete\ all\ icon.svg);
         position: relative;
         top: 50%; left: 50%;
         transform: translate(-50%, -50%);
