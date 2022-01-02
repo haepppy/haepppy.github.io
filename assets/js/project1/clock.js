@@ -9,9 +9,11 @@ function getClock() {
     const year = date.getFullYear();
     const month = String(date.getMonth()).padStart(2,"0");
     const day = String(date.getDay()).padStart(2,"0");
+    const week = ['일', '월', '화', '수', '목', '금', '토'];
+    const weekName = week[date.getDay()];
 
     clock.innerText = `${hours} : ${minutes}`;
-    dateArea.innerText = `${year}년 ${month}월 ${day}일`;
+    dateArea.innerText = `${year}년 ${month}월 ${day}일 ${weekName}요일`;
 };
 getClock();
 setInterval(getClock, 1000);

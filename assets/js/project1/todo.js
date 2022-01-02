@@ -7,26 +7,6 @@ const TODOS_KEY = "toDos";
 
 let toDos = []; //const -> let
 
-function panitCheck(list) {
-
-}
-
-function checkedI(e) {
-    let thisCheckedId = parseInt(e.target.id);
-    let index = toDos.findIndex(i => i.checkedId === thisCheckedId);
-    console.log(index);
-    let obj = toDos[index];
-    const trueValue = true;
-    const falseValue = false;
-    if (obj.checked) {
-        obj.checked = falseValue
-    } else {
-        obj.checked = trueValue;
-    }
-    saveToDos();
-    console.log(obj);
-};
-
 
 function saveToDos() {
     localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
@@ -36,8 +16,21 @@ function deleteToDo(e) {
     const thisLi = e.target.parentElement;
     thisLi.remove();
     toDos = toDos.filter((todo) => todo.id !== parseInt(thisLi.id)); //자료형 문자형에서 숫자형으로 바꿔줘야함
-    console.log(toDos);
     saveToDos(); //새로 바뀐 배열을 다시 스토리지에 업데이트
+};
+
+function checkedI(e) {
+    let thisCheckedId = parseInt(e.target.id);
+    let index = toDos.findIndex(i => i.checkedId === thisCheckedId);
+    let obj = toDos[index];
+    const trueValue = true;
+    const falseValue = false;
+    if (obj.checked) {
+        obj.checked = falseValue
+    } else {
+        obj.checked = trueValue;
+    }
+    saveToDos();
 };
 
 function paintToDo(newTodo) { //이 함수가 받는 것은 더이상 string이 아니고 object임
@@ -98,3 +91,47 @@ if (savedToDos !== null) {
     toDos = parsedToDos; //toDos 배열이 항상 빈 배열로 시작하는 것을 막기 위함 (예전 복사본 유지하기)
     parsedToDos.forEach(paintToDo); //array의 각 item에 대해 paintToDo 실행 
 };
+
+
+/* 스크롤 젤 아래로 고정 - 미완 */
+toDoList.scrollTop = toDoList.scrollHeight;
+
+/* color setting page */
+const colorSetPage = document.querySelector("#color-setting");
+const setting = document.querySelector("#setting");
+const backIcon = document.querySelector(".back-icon");
+const colorCircle = document.querySelector(".color-grid");
+let changeColor = localStorage.getItem("color");
+
+function colorSetting() {
+    colorSetPage.classList.toggle('hidden');
+}
+
+function colorChange(e) {
+    const color = e.target;
+    const thisColor = `.${color.classList[1]}`;
+    const colorInfo = document.querySelector(thisColor);
+    const colorValue = window.getComputedStyle(colorInfo).getPropertyValue('background-color');
+    localStorage.setItem("color", colorValue);
+    document.documentElement.style.setProperty('--main-color', colorValue);
+    colorSetPage.classList.add("hidden");
+}
+
+setting.addEventListener("click", colorSetting);
+backIcon.addEventListener("click", colorSetting);
+colorCircle.addEventListener("click", colorChange);
+
+if (changeColor !== null) {
+    document.documentElement.style.setProperty('--main-color', changeColor);
+};
+
+
+/* delete all btn */
+const deleteAllBtn = document.querySelector("#delete-all");
+
+function deleteAll() {
+    toDoList.remove();
+    localStorage.removeItem(TODOS_KEY);
+}
+
+deleteAllBtn.addEventListener("click", deleteAll);
