@@ -21,4 +21,9 @@ function onGeoError() {
     alert("Can't find you. No weather for you.")
 }
 
-navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
+//데스크탑 버전일 때만 실행
+const deviceSize = window.matchMedia("screen and(max-width: 1023px)");
+
+if (!deviceSize.matches) {
+    navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
+};

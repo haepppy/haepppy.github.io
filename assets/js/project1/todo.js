@@ -3,7 +3,10 @@ const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.querySelector("#todo-list");
 const checkboxArr = document.querySelectorAll("input[type='checkbox']");
 
+let deviceSize = window.matchMedia("screen and (max-width: 1023px)");
+
 const TODOS_KEY = "toDos";
+const HIDDEN_STYLE = "hidden";
 
 let toDos = []; //const -> let
 
@@ -59,10 +62,15 @@ function paintToDo(newTodo) { //이 함수가 받는 것은 더이상 string이 
     const span2 = document.createElement("span");
     span2.className = "checkBox";
 
+    const editBtn = document.createElement("span");
+    editBtn.className = "editBtn";
+    editBtn.addEventListener("click", paintChangeInput);
+
     li.appendChild(checkBox);
     li.appendChild(label);
     label.appendChild(span2);
     label.appendChild(span);
+    li.appendChild(editBtn);
     li.appendChild(btn); //순서! span 다음으로 들어와야 함
     toDoList.appendChild(li); //전체적으로 append는 가장 마지막에 작성되어야 함
 };
@@ -93,9 +101,6 @@ if (savedToDos !== null) {
 };
 
 
-/* 스크롤 젤 아래로 고정 - 미완 */
-toDoList.scrollTop = toDoList.scrollHeight;
-
 /* color setting page */
 const colorSetPage = document.querySelector("#color-setting");
 const setting = document.querySelector("#setting");
@@ -104,7 +109,7 @@ const colorCircle = document.querySelector(".color-grid");
 let changeColor = localStorage.getItem("color");
 
 function colorSetting() {
-    colorSetPage.classList.toggle('hidden');
+    colorSetPage.classList.toggle(HIDDEN_STYLE);
 }
 
 function colorChange(e) {
@@ -114,7 +119,7 @@ function colorChange(e) {
     const colorValue = window.getComputedStyle(colorInfo).getPropertyValue('background-color');
     localStorage.setItem("color", colorValue);
     document.documentElement.style.setProperty('--main-color', colorValue);
-    colorSetPage.classList.add("hidden");
+    colorSetPage.classList.add(HIDDEN_STYLE);
 }
 
 setting.addEventListener("click", colorSetting);
@@ -130,8 +135,120 @@ if (changeColor !== null) {
 const deleteAllBtn = document.querySelector("#delete-all");
 
 function deleteAll() {
-    toDoList.remove();
+    toDoList.innerHTML = "";
+    toDos = [];
     localStorage.removeItem(TODOS_KEY);
 }
 
 deleteAllBtn.addEventListener("click", deleteAll);
+
+
+/* edit event */
+let changedObj;
+
+let startX = 0;
+let endX = 0;
+
+function clickEditBtn(e) {
+    e.preventDefault();
+    
+    const inputValue = e.target.form[0].value;
+    const span = e.path[2].children[1];
+    console.log(inputValue);
+
+    
+    span.innerText = String(inputValue);
+    span.classList.remove(HIDDEN_STYLE);
+    console.dir(span); 
+    
+    e.target.parentElement.remove();
+    saveToDos();
+};
+
+function changeSubmit(e) {
+    e.preventDefault();
+
+    const inputValue = e.target.lastChild.value;
+    const span = e.path[1].children[1].lastChild;
+
+    changedObj.text = inputValue;
+    span.innerText = String(inputValue);
+
+    e.target.remove();
+    saveToDos();
+}
+
+
+function paintChangeInput(c) {
+    const thisLi = c.target.offsetParent;
+    const thisSpan = thisLi.children[1].lastChild;
+    const form = document.createElement("form");
+    const input = document.createElement("input");
+
+    form.id = 'changeList';
+    form.addEventListener("submit", changeSubmit);
+
+    input.type = "text";
+    input.value = String(thisSpan.innerText);
+    input.autofocus = 'true';
+    input.className = "change-input";
+
+    const thisId = parseInt(thisLi.id);
+    const index = toDos.findIndex(i => i.id === thisId);
+    changedObj = toDos[index];
+
+    form.appendChild(input);
+    thisLi.appendChild(form);
+};
+
+
+function promptFunc(span) {
+    const spanText = String(span.target.innerText);
+    const newText = window.prompt("Edit To Do List", spanText);
+
+    const thisId = parseInt(span.target.offsetParent.id);
+    const index = toDos.findIndex(i => i.id === thisId);
+
+    if (newText === null) {
+        span.target.innerText = spanText;
+    } else {
+        span.target.innerText = newText;
+        changedObj = toDos[index];
+        changedObj.text = newText;
+    }
+    
+    span.target.classList.remove(HIDDEN_STYLE);
+    saveToDos();
+}
+
+
+//옆으로 밀기 이벤트 - touch
+function touchStart(s) {
+    startX = s.changedTouches[0].pageX;
+};
+
+function touchEnd (e) {
+    endX = e.changedTouches[0].pageX;
+    touchMove(e);
+};
+
+function touchMove(m) {
+    let moveX = startX - endX;
+    const target = m.target.tagName;
+    if (target == 'SPAN' && moveX > 30) { //중복 수행 막기
+        const checkBox = document.querySelector(".checkBox");
+        m.target.classList.add(HIDDEN_STYLE);
+        promptFunc(m);
+    };
+};
+
+toDoList.addEventListener("touchstart", touchStart, false);
+toDoList.addEventListener("touchend", touchEnd, false);
+
+
+
+
+
+
+
+

@@ -64,7 +64,7 @@ li {
     width: 100%;   
 }
 .inBoxArea {
-    width: 300px; height: fit-content;
+    width: 350px; height: fit-content;
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
@@ -123,7 +123,7 @@ h2#clock {
 }
 
 /* login */
-form#login-form input:first-child{
+form#login-form > input:first-child{
     -webkit-appearance: none;
     -webkit-border-radius: 0;
     width: 100%;
@@ -135,16 +135,14 @@ form#login-form input:first-child{
     text-align: center;
     padding: 4px 0;
 }
-form#login-form input:first-child::placeholder {
+form#login-form > input:first-child::placeholder {
     color: #ccc;
 }
-form#login-form input:first-child:focus::placeholder {
+form#login-form > input:first-child:focus::placeholder {
     color: transparent;
 }
 
-form#login-form input:last-child {
-    -webkit-appearance: none;
-    -webkit-border-radius: 0;
+form#login-form > input:last-child {
     width: 50%;
     background: #fff;
     margin-top: 10px;
@@ -153,7 +151,7 @@ form#login-form input:last-child {
     border-bottom: 1px solid #000;
     padding: 10px;
 }
-form#login-form input:last-child:hover {
+form#login-form > input:last-child:hover {
     box-shadow: inset 0px 1px 4px rgba(0,0,0, 0.3);
 }
 
@@ -184,10 +182,10 @@ form#login-form input:last-child:hover {
         z-index: 10;
         background-color: var(--main-color);
     }
-    form#login-form input:first-child {
+    form#login-form > input:first-child {
         width: 80%;
     }
-    form#login-form input {
+    form#login-form > input {
         position: relative;
         top: 50%;
         transform: translatey(-50%);
@@ -234,14 +232,12 @@ form#login-form input:last-child:hover {
     padding: 4px 4px;
     font-family: 'S-CoreDream-3Light';
 }
-#todo-form > input::placeholder {
+#todo-form > input::placeholder, 
+#todo-form > input:-ms-input-placeholder {
     color: #ccc;
 }
 #todo-form > input:focus::placeholder {
     color: transparent;
-}
-#todo-form > input:-ms-input-placeholder {
-    color: #ccc;
 }
 
 #todo-form > .square {
@@ -294,8 +290,10 @@ form#login-form input:last-child:hover {
 
 
 #todo-list {
-    height: 200px;
-    overflow-y: auto;
+    height: fit-content;
+    min-height: 50px;
+    max-height: 205px;
+    overflow-y: scroll;
 }
 #todo-list::-webkit-scrollbar {
     display: none;
@@ -309,7 +307,7 @@ form#login-form input:last-child:hover {
 
 #todo-list li > button {
     position: absolute;
-    right: 8px;
+    top: 2px; right: 8px;
     margin-right: 10px;
     background: none;
     border: none;
@@ -357,7 +355,40 @@ form#login-form input:last-child:hover {
 }
 
 #delete-all {
-    display: none;
+    display: block;
+    width: 16px; height: 16px;
+    position: absolute;
+    bottom: -25px; right: 14px;
+}
+.delete-all-icon {
+    display: block;
+    width: 16px; height: 16px;
+    background: var(--main-color);
+    border-radius: 4px;
+    background-image: url(/assets/images/delete\ all\ icon.svg); 
+    cursor: pointer;
+}
+
+#changeList > input:first-child {
+    position: absolute;
+    top: -4px; left: 27px;
+    display: block;
+    width: 250px;
+    font-family: 'S-CoreDream-3Light';
+    font-size: 16px;
+    padding: 4px;
+    border: none;
+    border-bottom: 1px solid #000;
+}
+
+.editBtn {
+    display: inline-block;
+    position: absolute;
+    top: 4px; right: 40px; 
+    width: 16px; height: 16px;
+    background: #fff;
+    background-image: url(/assets/images/edit\ icon.svg);
+    cursor: pointer;
 }
 
 
@@ -372,25 +403,38 @@ form#login-form input:last-child:hover {
         margin-right: -8px;
     }
     #todo-list li input[type="checkbox"] + label span:last-child {
-        width: fit-content;
+        display: inline-block;
+        width: 100%;
         max-width: 80%;
         line-height: 24px;
     }
     #delete-all {
-        display: block;
         width: 32px; height: 32px;
-        position: absolute;
         bottom: 12px; right: 12px;
     }
     .delete-all-icon {
-        display: block;
-        width: 16px; height: 16px;
-        background: var(--main-color);
-        border-radius: 4px;
-        background-image: url(/assets/images/delete\ all\ icon.svg);
         position: relative;
         top: 50%; left: 50%;
         transform: translate(-50%, -50%);
+    }
+
+    input.change-input {
+        -webkit-appearance: none;
+        -webkit-border-radius: 0;
+        position: absolute;
+        top: 0; left: 0;
+        width: 80%; height: 100%;
+        border: none;
+        border-bottom: 1px solid #000;
+        padding: 4px;
+    }
+    input.change-input:focus {
+        -webkit-appearance: none;
+        border: none;
+        border-bottom: 1px solid #000;
+    }
+    .editBtn {
+        display: none;
     }
 }
 
@@ -499,3 +543,7 @@ form#login-form input:last-child:hover {
     }
 
 }
+
+
+
+
