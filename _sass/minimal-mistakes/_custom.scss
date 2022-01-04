@@ -6,6 +6,11 @@
     position: relative;
     background-size: cover;
 }
+@media screen and (max-width: 1023px) {
+    .custom-header {
+        height: 50vh;
+    }
+}
 
 .custom-header > p {
     width: fit-content;
@@ -15,8 +20,8 @@
     color: #fff;
     text-shadow: 0 0px 10px rgba(0,0,0,0.5);
     margin: 0;
-    font-size: 30px;
-    letter-spacing: 170px;
+    font-size: 150%;
+    letter-spacing: 10vw;
     text-align: center;
     vertical-align: middle;
 }

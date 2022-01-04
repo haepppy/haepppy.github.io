@@ -11,11 +11,6 @@ side:
   - title: "Memo"
     url: categories/memo/
     children:
-      - title: "Diary"
-        url: categories/diary/
-  - title: "Study"
-    url: categories/study/
-    children:
       - title: "HTML"
         url: categories/html/
         category: "html"
@@ -25,7 +20,10 @@ side:
       - title: "Script"
         url: categories/script/
         category: "script"
-      - title: "Vanilla JS"
+  - title: "Study"
+    url: categories/study/
+    children:
+      - title: "Vanilla JS로 크롬앱 만들기"
         url: categories/vanilla-js/
         category: "vanilla-js"
   # - title: "Sample Collections"

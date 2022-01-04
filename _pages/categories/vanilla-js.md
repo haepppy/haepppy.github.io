@@ -27,6 +27,11 @@ sidebar:
     .linkBtn a:hover {
         background: #bbb;
     }
+    @media screen and (max-width: 1023px) {
+        .linkBtn {
+            right: 0px;
+        }
+    }
 </style>
 
 <div class="linkBtn">
