@@ -155,9 +155,7 @@ form#login-form > input:last-child:hover {
     box-shadow: inset 0px 1px 4px rgba(0,0,0, 0.3);
 }
 
-#setting {
-    display: none;
-}
+
 
 @media screen and (max-width: 1023px) {
     h2#date {
@@ -198,13 +196,7 @@ form#login-form > input:last-child:hover {
         bottom: 20px; right: 20px;
 
     }
-    #setting {
-        display: block;
-        width: 20px;
-        position: absolute;
-        top: 20px; right: 20px;
-        cursor: pointer;
-    }
+    
 }
 
 
@@ -490,29 +482,91 @@ form#login-form > input:last-child:hover {
 }
 
 
+/* 설정창 */
+#settingBtn {
+    display: block;
+    width: 20px;
+    position: absolute;
+    top: 30px; left: 0px;
+    cursor: pointer;
+}
+
+.ex {
+    display: none;
+}
+
+#color-setting {
+    background: #fff;
+    z-index: 15;
+    position: absolute;
+    top: 30px; left: 0px;
+    padding: 0;
+}
+#color-setting > h2 {
+    display: inline-block;
+    font-size: 16px;
+}
+#color-setting > span.back-icon {
+    display: inline-block;
+    cursor: pointer;
+    padding-right: 20px;
+}
+.color-grid {
+    display: flex;
+    gap: 12px;
+}
+.color-circle {
+    width: 26px; height: 26px;
+    border-radius: 100%;
+    margin: 8px;
+    cursor: pointer;
+}
+
+.default {
+    background-color: #6667AB;
+}
+.pink {
+    background-color: #d88c99;
+}
+.yellow {
+    background-color: #f2d0aa;
+}
+.black {
+    background-color: #000;
+}
+.green {
+    background-color: #85ad68;
+}
+.blue {
+    background-color: #87a5c1;
+}
+
 @media screen and (max-width: 1023px) {
+    #settingBtn {
+        right: 20px;
+        left: unset;
+    }
+    .ex {
+        display: block;
+        width: 100%;
+    }
     #color-setting {
         width: 100vw; height: 100vh;
-        background: #fff;
-        z-index: 15;
-        position: absolute;
-        top: 0; left: 0;
+        top: 0;
+        padding: 20px;
     }
     #color-setting > h2 {
         text-align: center;
-        padding: 20px;
+        padding-bottom: 20px;
     }
-    #color-setting > span {
+    #color-setting > span.back-icon {
         font-size: 24px;
         padding: 20px;
         position: absolute;
         top: 0; left: 0;
     }
     .color-grid {
-        width: 100%; height: 100%;
-        padding: 20px;
-        display: flex;
-        gap: 12px;
+        width: 100%; height: 30%;
         flex-wrap: wrap;
         align-content: flex-start;
         justify-content: center;
@@ -520,30 +574,5 @@ form#login-form > input:last-child:hover {
     }
     .color-circle {
         width: 12vw; height: 12vw;
-        border-radius: 100%;
-        margin: 8px;
     }
-    .default {
-        background-color: #6667AB;
-    }
-    .pink {
-        background-color: #d88c99;
-    }
-    .yellow {
-        background-color: #f2d0aa;
-    }
-    .black {
-        background-color: #000;
-    }
-    .green {
-        background-color: #85ad68;
-    }
-    .blue {
-        background-color: #87a5c1;
-    }
-
 }
-
-
-
-

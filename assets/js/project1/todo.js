@@ -22,7 +22,7 @@ function deleteToDo(e) {
     saveToDos(); //새로 바뀐 배열을 다시 스토리지에 업데이트
 };
 
-function checkedI(e) {
+function checked(e) {
     let thisCheckedId = parseInt(e.target.id);
     let index = toDos.findIndex(i => i.checkedId === thisCheckedId);
     let obj = toDos[index];
@@ -54,7 +54,7 @@ function paintToDo(newTodo) { //이 함수가 받는 것은 더이상 string이 
     checkBox.id = checkId;
     const thisCheck = newTodo.checked;
     checkBox.checked = thisCheck;
-    checkBox.addEventListener("click", checkedI);
+    checkBox.addEventListener("click", checked);
     
     const label = document.createElement("label");
     label.htmlFor = checkId;
@@ -101,36 +101,6 @@ if (savedToDos !== null) {
 };
 
 
-/* color setting page */
-const colorSetPage = document.querySelector("#color-setting");
-const setting = document.querySelector("#setting");
-const backIcon = document.querySelector(".back-icon");
-const colorCircle = document.querySelector(".color-grid");
-let changeColor = localStorage.getItem("color");
-
-function colorSetting() {
-    colorSetPage.classList.toggle(HIDDEN_STYLE);
-}
-
-function colorChange(e) {
-    const color = e.target;
-    const thisColor = `.${color.classList[1]}`;
-    const colorInfo = document.querySelector(thisColor);
-    const colorValue = window.getComputedStyle(colorInfo).getPropertyValue('background-color');
-    localStorage.setItem("color", colorValue);
-    document.documentElement.style.setProperty('--main-color', colorValue);
-    colorSetPage.classList.add(HIDDEN_STYLE);
-}
-
-setting.addEventListener("click", colorSetting);
-backIcon.addEventListener("click", colorSetting);
-colorCircle.addEventListener("click", colorChange);
-
-if (changeColor !== null) {
-    document.documentElement.style.setProperty('--main-color', changeColor);
-};
-
-
 /* delete all btn */
 const deleteAllBtn = document.querySelector("#delete-all");
 
@@ -149,35 +119,19 @@ let changedObj;
 let startX = 0;
 let endX = 0;
 
+//데스크탑
 function clickEditBtn(e) {
     e.preventDefault();
     
     const inputValue = e.target.form[0].value;
     const span = e.path[2].children[1];
-    console.log(inputValue);
-
     
     span.innerText = String(inputValue);
     span.classList.remove(HIDDEN_STYLE);
-    console.dir(span); 
-    
+
     e.target.parentElement.remove();
     saveToDos();
 };
-
-function changeSubmit(e) {
-    e.preventDefault();
-
-    const inputValue = e.target.lastChild.value;
-    const span = e.path[1].children[1].lastChild;
-
-    changedObj.text = inputValue;
-    span.innerText = String(inputValue);
-
-    e.target.remove();
-    saveToDos();
-}
-
 
 function paintChangeInput(c) {
     const thisLi = c.target.offsetParent;
@@ -201,23 +155,16 @@ function paintChangeInput(c) {
     thisLi.appendChild(form);
 };
 
+function changeSubmit(e) {
+    e.preventDefault();
 
-function promptFunc(span) {
-    const spanText = String(span.target.innerText);
-    const newText = window.prompt("Edit To Do List", spanText);
+    const inputValue = e.target.lastChild.value;
+    const span = e.path[1].children[1].lastChild;
 
-    const thisId = parseInt(span.target.offsetParent.id);
-    const index = toDos.findIndex(i => i.id === thisId);
+    changedObj.text = inputValue;
+    span.innerText = String(inputValue);
 
-    if (newText === null) {
-        span.target.innerText = spanText;
-    } else {
-        span.target.innerText = newText;
-        changedObj = toDos[index];
-        changedObj.text = newText;
-    }
-    
-    span.target.classList.remove(HIDDEN_STYLE);
+    e.target.remove();
     saveToDos();
 }
 
@@ -245,10 +192,52 @@ function touchMove(m) {
 toDoList.addEventListener("touchstart", touchStart, false);
 toDoList.addEventListener("touchend", touchEnd, false);
 
+/* 모바일 프롬프트 */
+function promptFunc(span) {
+    const spanText = String(span.target.innerText);
+    const newText = window.prompt("Edit To Do List", spanText);
+
+    const thisId = parseInt(span.target.offsetParent.id);
+    const index = toDos.findIndex(i => i.id === thisId);
+
+    if (newText === null) {
+        span.target.innerText = spanText;
+    } else {
+        span.target.innerText = newText;
+        changedObj = toDos[index];
+        changedObj.text = newText;
+    }
+    
+    span.target.classList.remove(HIDDEN_STYLE);
+    saveToDos();
+}
 
 
+/* color setting page */
+const colorSetPage = document.querySelector("#color-setting");
+const setting = document.querySelector("#settingBtn");
+const backIcon = document.querySelector(".back-icon");
+const colorCircle = document.querySelector(".color-grid");
+let changeColor = localStorage.getItem("color");
 
+function colorSetting() {
+    colorSetPage.classList.toggle(HIDDEN_STYLE);
+}
 
+function colorChange(e) {
+    const color = e.target;
+    const thisColor = `.${color.classList[1]}`;
+    const colorInfo = document.querySelector(thisColor);
+    const colorValue = window.getComputedStyle(colorInfo).getPropertyValue('background-color');
+    localStorage.setItem("color", colorValue);
+    document.documentElement.style.setProperty('--main-color', colorValue);
+    colorSetPage.classList.add(HIDDEN_STYLE);
+}
 
+setting.addEventListener("click", colorSetting);
+backIcon.addEventListener("click", colorSetting);
+colorCircle.addEventListener("click", colorChange);
 
-
+if (changeColor !== null) {
+    document.documentElement.style.setProperty('--main-color', changeColor);
+};
