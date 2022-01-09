@@ -26,6 +26,9 @@ side:
       - title: "Vanilla JS로 크롬앱 만들기"
         url: categories/vanilla-js/
         category: "vanilla-js"
+      - title: "Vanilla JS로 그림판 만들기"
+        url: categories/vanilla-js-paint/
+        category: "js-paint"
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"

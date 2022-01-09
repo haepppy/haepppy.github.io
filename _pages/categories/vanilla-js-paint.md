@@ -1,7 +1,7 @@
 ---
 layout: archive
-permalink: categories/vanilla-js/
-title: "Vanilla JS로 크롬앱 만들기"
+permalink: categories/vanilla-js-paint/
+title: "Vanilla JS로 그림판 만들기"
 
 author_profile: true
 sidebar_main: true
@@ -35,9 +35,8 @@ sidebar:
 </style>
 
 <div class="linkBtn">
-    <a href="https://nomadcoders.co/javascript-for-beginners/lobby">강의 바로가기</a>
+    <a href="https://nomadcoders.co/javascript-for-beginners-2/lobby">강의 바로가기</a>
 </div>
 
-{% assign posts = site.categories.vanilla-js %}
+{% assign posts = site.categories.vanilla-js-paint %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}
-

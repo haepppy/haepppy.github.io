@@ -116,8 +116,7 @@ deleteAllBtn.addEventListener("click", deleteAll);
 /* edit event */
 let changedObj;
 
-let startX = 0;
-let endX = 0;
+
 
 //데스크탑
 function clickEditBtn(e) {
@@ -168,24 +167,51 @@ function changeSubmit(e) {
     saveToDos();
 }
 
-
 //옆으로 밀기 이벤트 - touch
-function touchStart(s) {
-    startX = s.changedTouches[0].pageX;
+
+let startX = 0;
+let startY = 0;
+let endX = 0;
+let endY = 0;
+
+let moveType = -1;
+let hSlope = ((window.innerHeight / 2) / window.innerWidth).toFixed(2) * 1;
+
+function getMoveType(x, y) {
+    moveType = -1;
+    let nDis = x + y;
+    if(nDis < 30) {return moveType};
+
+    let slope = parseFloat((y / x).toFixed(2), 10);
+
+    if(slope > hSlope) {
+        moveType = 1;
+    } else {
+        moveType = 0;
+    }
+
+    return moveType;
+}
+
+function touchStart(e) {
+    startX = e.changedTouches[0].pageX;
+    startY = e.changedTouches[0].pageY;
 };
 
 function touchEnd (e) {
     endX = e.changedTouches[0].pageX;
+    endY = e.changedTouches[0].pageY;
     touchMove(e);
 };
 
-function touchMove(m) {
+function touchMove(e) {
     let moveX = startX - endX;
-    const target = m.target.tagName;
-    if (target == 'SPAN' && moveX > 30) { //중복 수행 막기
-        const checkBox = document.querySelector(".checkBox");
-        m.target.classList.add(HIDDEN_STYLE);
-        promptFunc(m);
+    let moveY = startY - endY;
+    moveType = getMoveType(moveX, moveY);
+    const target = e.target.tagName;
+    if (target == 'SPAN' && moveType === 0) {
+        e.target.classList.add(HIDDEN_STYLE);
+        promptFunc(e);
     };
 };
 

@@ -329,7 +329,7 @@ form#login-form > input:last-child:hover {
 }
 #todo-list li input[type="checkbox"]:checked + label .checkBox {
     background: var(--main-color);
-    background-image: url(/assets/images/checked.svg);
+    background-image: url(/assets/images/todolist/checked.svg);
 }
 
 #todo-list li input[type="checkbox"] + label span:last-child {
@@ -357,7 +357,7 @@ form#login-form > input:last-child:hover {
     width: 16px; height: 16px;
     background: var(--main-color);
     border-radius: 4px;
-    background-image: url(/assets/images/delete\ all\ icon.svg); 
+    background-image: url(/assets/images/todolist/delete\ all\ icon.svg); 
     cursor: pointer;
 }
 
@@ -373,13 +373,17 @@ form#login-form > input:last-child:hover {
     border-bottom: 1px solid #000;
 }
 
-.editBtn {
+#todo-list li:hover > .editBtn {
     display: inline-block;
+}
+
+.editBtn {
+    display: none;
     position: absolute;
     top: 4px; right: 40px; 
     width: 16px; height: 16px;
     background: #fff;
-    background-image: url(/assets/images/edit\ icon.svg);
+    background-image: url(/assets/images/todolist/edit\ icon.svg);
     cursor: pointer;
 }
 
@@ -483,7 +487,7 @@ form#login-form > input:last-child:hover {
 
 
 /* 설정창 */
-#settingBtn {
+img#settingBtn {
     display: block;
     width: 20px;
     position: absolute;
@@ -542,7 +546,7 @@ form#login-form > input:last-child:hover {
 }
 
 @media screen and (max-width: 1023px) {
-    #settingBtn {
+    img#settingBtn {
         right: 20px;
         left: unset;
     }
