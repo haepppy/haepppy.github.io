@@ -432,6 +432,9 @@ form#login-form > input:last-child:hover {
     .editBtn {
         display: none;
     }
+    #todo-list li:hover > .editBtn {
+        display: none;
+    }
 }
 
 

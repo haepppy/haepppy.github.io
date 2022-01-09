@@ -175,7 +175,8 @@ let endX = 0;
 let endY = 0;
 
 let moveType = -1;
-let hSlope = ((window.innerHeight / 2) / window.innerWidth).toFixed(2) * 1;
+let hSlope = ((window.innerHeight / 2) / window.innerWidth).toFixed(2) * 0.3;
+console.log("hslope", hSlope);
 
 function getMoveType(x, y) {
     moveType = -1;
@@ -183,6 +184,7 @@ function getMoveType(x, y) {
     if(nDis < 30) {return moveType};
 
     let slope = parseFloat((y / x).toFixed(2), 10);
+    console.log("slope", slope);
 
     if(slope > hSlope) {
         moveType = 1;
@@ -208,8 +210,11 @@ function touchMove(e) {
     let moveX = startX - endX;
     let moveY = startY - endY;
     moveType = getMoveType(moveX, moveY);
+    console.log(moveType);
+
     const target = e.target.tagName;
     if (target == 'SPAN' && moveType === 0) {
+        console.log("a",moveType);
         e.target.classList.add(HIDDEN_STYLE);
         promptFunc(e);
     };
