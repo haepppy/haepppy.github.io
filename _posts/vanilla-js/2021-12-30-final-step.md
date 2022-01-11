@@ -119,45 +119,49 @@ let changedObj;
 let startX = 0;
 let endX = 0;
 
-//데스크탑에서 편집 버튼 누를 시 수행하는 함수
-function clickEditBtn(e) {
-    e.preventDefault();
-    
-    const inputValue = e.target.form[0].value;
-    const span = e.path[2].children[1];
-    
-    span.innerText = String(inputValue);
-    span.classList.remove(HIDDEN_STYLE);
 
-    e.target.parentElement.remove();
-    saveToDos();
-};
+function handleEditBtnClick(e) {
+    console.dir(e);
+    if(!editOn) {
+        editOn = true;
+    } else {
+        editOn = false;
+    }
+}
 
-//데스크탑에서 리스트 자리에 form 생성하는 함수
+//editBtn 클릭시 입력창 나타내고 입력창 있는 상태에서 클릭시 submit 동작 진행
 function paintChangeInput(e) {
-    const thisLi = e.target.offsetParent;
-    const thisSpan = thisLi.children[1].lastChild;
-    const form = document.createElement("form");
-    const input = document.createElement("input");
+    const editOn = e.target.parentElement.children[4];
 
-    form.id = 'changeList';
-    form.addEventListener("submit", changeSubmit);
+    if (!editOn) {
+        const thisLi = e.target.offsetParent;
+        const thisSpan = thisLi.children[1].lastChild;
+        const form = document.createElement("form");
+        const input = document.createElement("input");
 
-    input.type = "text";
-    input.value = String(thisSpan.innerText);
-    input.autofocus = 'true';
-    input.className = "change-input";
+        form.id = 'changeList';
+        form.addEventListener("submit", editSubmit);
 
-    const thisId = parseInt(thisLi.id);
-    const index = toDos.findIndex(i => i.id === thisId);
-    changedObj = toDos[index];
+        input.type = "text";
+        input.value = String(thisSpan.innerText);
+        input.autofocus = 'true';
+        input.className = "change-input";
+        thisSpan.innerHTML = "";
 
-    form.appendChild(input);
-    thisLi.appendChild(form);
+        const thisId = parseInt(thisLi.id);
+        const index = toDos.findIndex(i => i.id === thisId);
+        changedObj = toDos[index];
+
+        form.appendChild(input);
+        thisLi.appendChild(form);
+
+    } else if(editOn) {
+        editClick(e);
+    };
+
 };
 
-//데스크탑에서 submit 이벤트가 작동될 때 수행하는 함수
-function changeSubmit(e) {
+function editSubmit(e) {
     e.preventDefault();
 
     const inputValue = e.target.lastChild.value;
@@ -167,6 +171,17 @@ function changeSubmit(e) {
     span.innerText = String(inputValue);
 
     e.target.remove();
+    saveToDos();
+}
+
+function editClick(e) {
+    const inputValue = e.target.parentElement.lastChild.firstChild.value;
+    const span = e.target.parentElement.children[1].children[1];
+    
+    span.innerText = String(inputValue);
+    span.classList.remove(HIDDEN_STYLE);
+
+    e.target.parentElement.lastChild.remove();
     saveToDos();
 }
 

@@ -64,7 +64,7 @@ function paintToDo(newTodo) { //이 함수가 받는 것은 더이상 string이 
 
     const editBtn = document.createElement("span");
     editBtn.className = "editBtn";
-    editBtn.addEventListener("click", paintChangeInput);
+    editBtn.addEventListener("click", clickEditBtn);
 
     li.appendChild(checkBox);
     li.appendChild(label);
@@ -117,34 +117,65 @@ deleteAllBtn.addEventListener("click", deleteAll);
 let changedObj;
 
 
-
 //데스크탑
-function clickEditBtn(e) {
-    e.preventDefault();
-    
-    const inputValue = e.target.form[0].value;
-    const span = e.path[2].children[1];
-    
-    span.innerText = String(inputValue);
-    span.classList.remove(HIDDEN_STYLE);
+function pressEnter(e) {
+    if(e.keyCode == 13) {
+        e.preventDefault();
+        console.dir(e);
+        const value = e.target.value;
+        const span = e.path[2].children[1].lastChild;
 
-    e.target.parentElement.remove();
-    saveToDos();
+        changedObj.text = value;
+        span.innerText = String(value);
+
+        e.target.parentElement.remove();
+        saveToDos();
+    };
 };
 
-function paintChangeInput(c) {
-    const thisLi = c.target.offsetParent;
+function clickEditBtn(e) {
+    const editOn = e.target.parentElement.children[4];
+
+    if (!editOn) {
+        paintEditInput(e);
+
+    } else if(editOn) {
+        editClickSubmit(e);
+    };
+};
+
+function paintEditInput(e) {
+    const thisLi = e.target.offsetParent;
+    const thisSpan = thisLi.children[1].lastChild;
+    const form = document.createElement("form");
+    const textArea = document.createElement("textarea");
+
+    textArea.value = String(thisSpan.innerText);
+    textArea.className = "edit-textarea";
+    textArea.focus();
+    textArea.addEventListener("keydown", pressEnter);
+
+    const thisId = parseInt(thisLi.id);
+    const index = toDos.findIndex(i => i.id === thisId);
+    changedObj = toDos[index];
+
+    form.appendChild(textArea);
+    thisLi.appendChild(form);
+
+    /*
+    const thisLi = e.target.offsetParent;
     const thisSpan = thisLi.children[1].lastChild;
     const form = document.createElement("form");
     const input = document.createElement("input");
 
     form.id = 'changeList';
-    form.addEventListener("submit", changeSubmit);
+    form.addEventListener("submit", editSubmit);
 
     input.type = "text";
     input.value = String(thisSpan.innerText);
     input.autofocus = 'true';
     input.className = "change-input";
+    thisSpan.innerHTML = "";
 
     const thisId = parseInt(thisLi.id);
     const index = toDos.findIndex(i => i.id === thisId);
@@ -152,18 +183,30 @@ function paintChangeInput(c) {
 
     form.appendChild(input);
     thisLi.appendChild(form);
-};
+    */
+}
 
-function changeSubmit(e) {
+function editSubmit(e) {
     e.preventDefault();
 
     const inputValue = e.target.lastChild.value;
     const span = e.path[1].children[1].lastChild;
 
-    changedObj.text = inputValue;
+    changedObj.text = inputValue; //배열 내용 업데이트
     span.innerText = String(inputValue);
 
     e.target.remove();
+    saveToDos();
+}
+
+function editClickSubmit(e) {
+    const inputValue = e.target.parentElement.lastChild.firstChild.value;
+    const span = e.target.parentElement.children[1].children[1];
+    
+    changedObj.text = inputValue;
+    span.innerText = String(inputValue);
+
+    e.target.parentElement.lastChild.remove();
     saveToDos();
 }
 
@@ -176,7 +219,7 @@ let endY = 0;
 
 let moveType = -1;
 let hSlope = ((window.innerHeight / 2) / window.innerWidth).toFixed(2) * 0.3;
-console.log("hslope", hSlope);
+
 
 function getMoveType(x, y) {
     moveType = -1;
@@ -185,8 +228,8 @@ function getMoveType(x, y) {
 
     let slope = parseFloat((y / x).toFixed(2), 10);
     console.log("slope", slope);
-
-    if(slope > hSlope) {
+    console.log("hslope", hSlope);
+    if(slope > hSlope || slope < 0) {
         moveType = 1;
     } else {
         moveType = 0;
@@ -272,3 +315,24 @@ colorCircle.addEventListener("click", colorChange);
 if (changeColor !== null) {
     document.documentElement.style.setProperty('--main-color', changeColor);
 };
+
+//to do list scroll
+function onScroll(e) {
+    e.preventDefault();
+
+    if(e.deltaY < 0) { //위로 스크롤
+        this.scrollBy({
+            top: -100,
+            left: 0,
+            behavior: 'smooth'
+        });
+    } else { //아래로 스크롤
+        this.scrollBy({
+            top: 100,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }
+}
+
+toDoList.addEventListener("wheel", onScroll, false);
