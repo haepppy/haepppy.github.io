@@ -226,10 +226,10 @@ function getMoveType(x, y) {
     let nDis = x + y;
     if(nDis < 30) {return moveType};
 
-    let slope = parseFloat((y / x).toFixed(2), 10);
+    let slope = Math.abs(parseFloat((y / x).toFixed(2), 10)); //기울기값 절대값 처리
     console.log("slope", slope);
     console.log("hslope", hSlope);
-    if(slope > hSlope || slope < 0) {
+    if(slope > hSlope) {
         moveType = 1;
     } else {
         moveType = 0;
@@ -322,13 +322,13 @@ function onScroll(e) {
 
     if(e.deltaY < 0) { //위로 스크롤
         this.scrollBy({
-            top: -100,
+            top: -150,
             left: 0,
             behavior: 'smooth'
         });
     } else { //아래로 스크롤
         this.scrollBy({
-            top: 100,
+            top: 150,
             left: 0,
             behavior: 'smooth'
         });
