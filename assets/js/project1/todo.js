@@ -84,7 +84,7 @@ function handleToDoSubmit(e) {
         id: Date.now(),
         checkedId: Math.floor(Date.now()/2),
         checked: false,
-    }
+    };
     toDos.push(newToDoObj);
     paintToDo(newToDoObj); //위에서 생성한 변수를 paintToDo 함수로 보내기
     saveToDos();
