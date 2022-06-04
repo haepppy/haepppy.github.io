@@ -20,9 +20,14 @@ side:
       - title: "Script"
         url: categories/script/
         category: "script"
-      - title: "React"
-        url: categories/react/
-        category: "react"
+      - title: "Design"
+        url: categories/design/
+        category: "design"
+
+      #- title: "React"
+        #url: categories/react/
+        #category: "react"
+        
   - title: "Study"
     url: categories/study/
     children:

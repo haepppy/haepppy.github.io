@@ -1,0 +1,34 @@
+---
+layout: single
+title:  "[브런치] '디자인 독학하기-(2)' - by.김경환"
+folder: "design"
+
+categories:
+    - design
+tags:
+    - UI 디자인
+    - UX 디자인
+    - UI 디자인을 위한 UX 원칙
+    - 내비게이션
+    - 전환율
+    - 데이터 기반 디자인
+
+author_profile: true
+sidebar:
+  nav: "side"
+related: false
+
+toc: true
+toc_label: "목록"
+toc_icon: "star"
+toc_sticky: true
+---
+
+<a href="https://brunch.co.kr/brunchbook/share-design" target="_blank">🔗본문링크</a>
+
+## UI 디자인을 위한 UX 원칟 10가지 (ver 2.0)  
+
+
+[↩ 이전 글 바로가기](../design02)
+
+
