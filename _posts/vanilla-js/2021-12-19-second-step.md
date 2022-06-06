@@ -8,6 +8,8 @@ categories:
 tags:
     - 인강 정리
     - 기본 개념
+    - 자바스크립트
+keywords: 
     - 자바스크립트와 HTML
     - event
     - 자바스크립트와 CSS

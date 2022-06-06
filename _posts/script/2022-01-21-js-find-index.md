@@ -8,6 +8,7 @@ categories:
 tags:
     - 인강 정리
     - 기본 개념
+keywords: 
     - Application_Weather
 
 author_profile: true

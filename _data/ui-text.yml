@@ -21,6 +21,7 @@ en: &DEFAULT_EN
   share_on_label             : "Share on"
   meta_label                 :
   tags_label                 : "Tags:"
+  keywords_label             : "Keywords:"
   categories_label           : "Categories:"
   date_label                 : "Updated:"
   comments_label             : "Leave a comment"
@@ -612,6 +613,7 @@ ko: &DEFAULT_KO
   share_on_label             : "공유하기"
   meta_label                 :
   tags_label                 : "태그:"
+  keywords_label             : "키워드:"
   categories_label           : "카테고리:"
   date_label                 : "업데이트:"
   comments_label             : "댓글남기기"

@@ -6,6 +6,8 @@ folder: "html"
 categories:
     - html
 tags:
+    - input
+keywords:
     - input 태그
     - input 속성
 

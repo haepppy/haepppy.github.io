@@ -8,6 +8,8 @@ categories:
 tags:
     - 인강 정리
     - 기본 개념
+    - 자바스크립트    
+keywords:
     - Quotes and Background
     - Math.random( )
     - Math.fllor( )

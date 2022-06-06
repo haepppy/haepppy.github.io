@@ -1,0 +1,19 @@
+{% case site.keyword_archive.type %}
+  {% when "liquid" %}
+    {% assign path_type = "#" %}
+  {% when "jekyll-archives" %}
+    {% assign path_type = nil %}
+{% endcase %}
+
+{% if site.keyword_archive.path %}
+  {% assign keywords_sorted = page.keywords | sort_natural %}
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].keywords_label | default: "Keywords:" }} </strong>
+    <span itemprop="keywords">
+    {% for keyword_word in keywords_sorted %}
+        <a class="page__taxonomy-item p-category" style="background: transparent;" rel="keyword">{{ keyword_word }}</a>{% unless forloop.last %}<span class="sep">, </span>{% endunless %}
+    {% endfor %}
+    </span>
+  </p>
+{% endif %}

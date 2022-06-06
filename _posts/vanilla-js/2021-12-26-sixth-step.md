@@ -8,6 +8,8 @@ categories:
 tags:
     - 인강 정리
     - 기본 개념
+    - 자바스크립트
+keywords:
     - Application_To Do List
     - document.createElement( )
     - .appendChild( )
