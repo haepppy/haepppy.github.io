@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./banner-style2.css">
+    <title>Document</title>
+</head>
+<body>
+    <body>
+      <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box  ;
+}
+.slide {
+    /* layout */
+    display: flex;
+    flex-wrap: nowrap;
+    /* 컨테이너의 내용물이 컨테이너 크기(width, height)를 넘어설 때 보이지 않도록 하기 위해 hidden을 준다. */
+    overflow: hidden;
+  
+    /* position */
+    /* slide_button의 position absolute가 컨테이너 안쪽에서 top, left, right offset이 적용될 수 있도록 relative를 준다. (기본값이 static인데, static인 경우 그 상위 컨테이너로 나가면서 현재 코드에선 html을 기준으로 offset을 적용시키기 때문) */
+    position: relative;
+  
+    /* size */
+    width: 100%;
+  
+    /* slide drag를 위해 DOM요소가 드래그로 선택되는것을 방지 */
+    user-select: none;
+  }
+  .slide_item {
+    /* layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    /* position - 버튼 클릭시 left offset값을 적용시키기 위해 */
+    position: relative;
+    left: 0px;
+  
+    /* size */
+    width: 100%;
+    height: 500px;
+    /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
+    flex-shrink: 0;
+  
+    /* transition : 이동 속도 */
+    transition: left 1s ease-in-out; 
+  }
+  .slide_item img {
+    width: 100%;
+  }
+  .slide_button {
+    /* layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    /* position */
+    position: absolute;
+    /* 버튼이 중앙에 위치하게 하기위해 계산 */
+    top: calc(50% - 16px);
+  
+    /* size */
+    width: 32px;
+    height: 32px;
+  
+    /* style */
+    border-radius: 100%;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  .slide_prev_button {
+    left: 40px;
+  }
+  .slide_next_button {
+    right: 40px;
+  }
+  
+  /* 각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용 */
+  .slide_item.item1 {
+    background-color: darkgoldenrod;
+  }
+  .slide_item.item2 {
+    background-color: aqua;
+  }
+  .slide_item.item3 {
+    background-color: blueviolet;
+  }
+  .slide_item.item4 {
+    background-color: burlywood;
+  }
+  .slide_item.item5 {
+    background-color: cornflowerblue;
+  }
+  
+  /* 페이지네이션 스타일 */
+  ul,
+  li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  .slide_pagination {
+    /* layout */
+    width: 100vw;
+    display: flex;
+    margin: 0;
+
+    /* position */
+    position: absolute;
+    bottom: 0px;
+    /* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
+
+  }
+  .slide_pagination > li {
+    /* 현재 슬라이드가 아닌 것은 투명도 부여 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    font-size: 20px;
+    width: 100%;
+    height: 80px;
+    text-align: center;
+    border: 1px solid #fff;
+    border-left: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 16px;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+  }
+  .slide_pagination > li:hover > span.pager_cont {
+    position: relative;
+    transform: scale(110%)
+  }
+  .slide_pagination > li > span {
+    transition-property: transform;
+    transition: 0.2s cubic-bezier(.4,0,.72,.57);
+  }
+  .slide_pagination > li.active {
+    /* 현재 슬라이드 색상은 투명도 없이 */
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  /*
+.slide_pagination > li.active span.pager_tit::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5%;
+    height: 20px;
+    padding: 4px;
+    border-bottom: 1px solid #222;
+}
+*/
+  span.pager_tit {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  /*
+  span.pager_tit::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5%;
+    height: 20px;
+    padding: 4px;
+    border-bottom: 1px solid #fff;
+  }
+  */
+  span.pager_cont {
+    font-weight: normal;
+    font-size: 14px;
+  }
+  
+  .slide_item_duplicate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 0px;
+    width: 100%;
+    height: 300px;
+    flex-shrink: 0;
+    transition: left 0.15s ease-in-out;
+  }
+
+  div.banner_cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1080px;
+    height: 100%;
+    line-height: 1.5;
+    color: #fff;
+  }
+  span.inBanner_tit {
+    font-size: 36px;
+    font-weight: bold;
+  }
+  span.inBanner_sub {
+    font-size: 24px;
+  }
+  div.inBanner_btn {
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 40px;
+    border-radius: 0px;
+    background-color: transparent;
+    border: 1px solid #fff;
+    margin-top: 24px;
+    cursor: pointer;
+  }
+      </style>
+        <div class="slide slide_wrap">
+            <div class="slide_item item1">
+                <a href="#">
+                    <img src="./제목-없음-1.png" alt="1번 배너">
+                    <div class="banner_cont">
+                        <span class="inBanner_tit">요즘 대세 얼그레이 하이볼,</span>
+                        <span class="inBanner_sub">제대로 즐기고 싶다면?</span>
+                        <div class="inBanner_btn">구매하기</div>
+                    </div>
+                </a>
+            </div>
+            <div class="slide_item item2">
+                <a href="#">
+                    <img src="./제목-없음-2.png" alt="2번 배너">
+                    <div class="banner_cont">
+                        <span class="inBanner_tit">열띤 반응과 완판으로 입증된 맛,</span>
+                        <span class="inBanner_sub">이블 하이볼 믹스!</span>
+                        <div class="inBanner_btn">자세히보기</div>
+                    </div>
+                </a>
+            </div>
+            <div class="slide_item item3">
+                <a href="#">
+                    <img src="./제목-없음-3.png" alt="3번 배너">
+                    <div class="banner_cont">
+                        <span class="inBanner_tit">신규 회원가입 이벤트</span>
+                        <span class="inBanner_sub">신규 고객에게 제공되는 풍성한 혜택</span>
+                        <div class="inBanner_btn">회원가입하기</div>
+                    </div>
+                </a>
+            </div>
+            <div class="slide_prev_button slide_button">
+                <img src="./chevron_left_FILL0_wght400_GRAD0_opsz48.svg" alt="이전배너 버튼">
+            </div>
+            <div class="slide_next_button slide_button">
+                <img src="./chevron_right_FILL0_wght400_GRAD0_opsz48.svg" alt="다음배너 버튼">
+            </div>
+            <ul class="slide_pagination">
+                <li class="active">
+                    <span class="pager_tit">얼그레이 하이볼</span>
+                    <span class="pager_cont">요즘 대세 얼그레이 하이볼, 제대로 즐기는 방법!</span>
+                </li>
+                <li class="">
+                    <span class="pager_tit">와디즈 완판</span>
+                    <span class="pager_cont">열렬한 후기와 완판으로 이미 입증된 맛, 이블 하이볼</span>
+                </li>
+                <li class="">
+                    <span class="pager_tit">회원가입 이벤트</span>
+                    <span class="pager_cont">신규가입시 풍성한 혜택을 선사합니다!</span>
+                </li>
+            </ul>
+          </div>
+
+        <script src="../js/jquery.svg3dtagcloud.min.js"></script>
+        <script>
+          // 슬라이크 전체 크기(width 구하기)
+const slide = document.querySelector(".slide");
+let slideWidth = slide.clientWidth;
+
+// 버튼 엘리먼트 선택하기
+const prevBtn = document.querySelector(".slide_prev_button");
+const nextBtn = document.querySelector(".slide_next_button");
+
+// 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
+let slideItems = document.querySelectorAll(".slide_item");
+// 현재 슬라이드 위치가 슬라이드 개수를 넘기지 않게 하기 위한 변수
+const maxSlide = slideItems.length;
+
+// 버튼 클릭할 때 마다 현재 슬라이드가 어디인지 알려주기 위한 변수
+let currSlide = 1;
+
+
+// 페이지네이션 생성
+const pagination = document.querySelector(".slide_pagination");
+/*
+for (let i = 0; i < maxSlide; i++) {
+  if (i === 0) pagination.innerHTML += `<li class="active">•</li>`;
+  else pagination.innerHTML += `<li>•</li>`;
+}
+*/
+
+const paginationItems = document.querySelectorAll(".slide_pagination > li");
+
+// 무한 슬라이드를 위해 start, end 슬라이드 복사하기
+const startSlide = slideItems[0];
+const endSlide = slideItems[slideItems.length - 1];
+const startElem = document.createElement("div");
+const endElem = document.createElement("div");
+
+endSlide.classList.forEach((c) => endElem.classList.add(c));
+endElem.innerHTML = endSlide.innerHTML;
+
+startSlide.classList.forEach((c) => startElem.classList.add(c));
+startElem.innerHTML = startSlide.innerHTML;
+
+// 각 복제한 엘리먼트 추가하기
+slideItems[0].before(endElem);
+slideItems[slideItems.length - 1].after(startElem);
+
+// 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
+slideItems = document.querySelectorAll(".slide_item");
+//
+let offset = slideWidth + currSlide;
+slideItems.forEach((i) => {
+  i.setAttribute("style", `left: ${-offset}px`);
+});
+
+function nextMove() {
+  currSlide++;
+  // 마지막 슬라이드 이상으로 넘어가지 않게 하기 위해서
+  if (currSlide <= maxSlide) {
+    // 슬라이드를 이동시키기 위한 offset 계산
+    const offset = slideWidth * currSlide;
+    // 각 슬라이드 아이템의 left에 offset 적용
+    slideItems.forEach((i) => {
+      i.setAttribute("style", `left: ${-offset}px`);
+    });
+    // 슬라이드 이동 시 현재 활성화된 pagination 변경
+    paginationItems.forEach((i) => i.classList.remove("active"));
+    paginationItems[currSlide - 1].classList.add("active");
+  } else {
+    // 무한 슬라이드 기능 - currSlide 값만 변경해줘도 되지만 시각적으로 자연스럽게 하기 위해 아래 코드 작성
+    currSlide = 0;
+    let offset = slideWidth * currSlide;
+    slideItems.forEach((i) => {
+      i.setAttribute("style", `transition: ${1}s; left: ${-offset}px`);
+    });
+    currSlide++;
+    offset = slideWidth * currSlide;
+    // 각 슬라이드 아이템의 left에 offset 적용
+    setTimeout(() => {
+      // 각 슬라이드 아이템의 left에 offset 적용
+      slideItems.forEach((i) => {
+        // i.setAttribute("style", `transition: ${0}s; left: ${-offset}px`);
+        i.setAttribute("style", `transition: ${1}s; left: ${-offset}px`);
+      });
+    }, 0);
+    // // 슬라이드 이동 시 현재 활성화된 pagination 변경
+    paginationItems.forEach((i) => i.classList.remove("active"));
+    paginationItems[currSlide - 1].classList.add("active");
+  }
+}
+function prevMove() {
+  currSlide--;
+  // 1번째 슬라이드 이하로 넘어가지 않게 하기 위해서
+  if (currSlide > 0) {
+    // 슬라이드를 이동시키기 위한 offset 계산
+    const offset = slideWidth * currSlide;
+    // 각 슬라이드 아이템의 left에 offset 적용
+    slideItems.forEach((i) => {
+      i.setAttribute("style", `left: ${-offset}px`);
+    });
+    // 슬라이드 이동 시 현재 활성화된 pagination 변경
+    paginationItems.forEach((i) => i.classList.remove("active"));
+    paginationItems[currSlide - 1].classList.add("active");
+  } else {
+    // 무한 슬라이드 기능 - currSlide 값만 변경해줘도 되지만 시각적으로 자연스럽게 하기 위해 아래 코드 작성
+    currSlide = maxSlide + 1;
+    let offset = slideWidth * currSlide;
+    // 각 슬라이드 아이템의 left에 offset 적용
+    slideItems.forEach((i) => {
+      i.setAttribute("style", `transition: ${1}s; left: ${-offset}px`);
+    });
+    currSlide--;
+    offset = slideWidth * currSlide;
+    setTimeout(() => {
+      // 각 슬라이드 아이템의 left에 offset 적용
+      slideItems.forEach((i) => {
+        // i.setAttribute("style", `transition: ${0}s; left: ${-offset}px`);
+        i.setAttribute("style", `transition: ${1}s; left: ${-offset}px`);
+      });
+    }, 0);
+    // 슬라이드 이동 시 현재 활성화된 pagination 변경
+    paginationItems.forEach((i) => i.classList.remove("active"));
+    paginationItems[currSlide - 1].classList.add("active");
+  }
+}
+
+// 버튼 엘리먼트에 클릭 이벤트 추가하기
+nextBtn.addEventListener("click", () => {
+  // 이후 버튼 누를 경우 현재 슬라이드를 변경
+  nextMove();
+});
+// 버튼 엘리먼트에 클릭 이벤트 추가하기
+prevBtn.addEventListener("click", () => {
+  // 이전 버튼 누를 경우 현재 슬라이드를 변경
+  prevMove();
+});
+
+// 브라우저 화면이 조정될 때 마다 slideWidth를 변경하기 위해
+window.addEventListener("resize", () => {
+  slideWidth = slide.clientWidth;
+});
+
+// 각 페이지네이션 클릭 시 해당 슬라이드로 이동하기
+for (let i = 0; i < maxSlide; i++) {
+  // 각 페이지네이션마다 클릭 이벤트 추가하기
+  paginationItems[i].addEventListener("click", () => {
+    // 클릭한 페이지네이션에 따라 현재 슬라이드 변경해주기(currSlide는 시작 위치가 1이기 때문에 + 1)
+    currSlide = i + 1;
+    // 슬라이드를 이동시키기 위한 offset 계산
+    const offset = slideWidth * currSlide;
+    // 각 슬라이드 아이템의 left에 offset 적용
+    slideItems.forEach((i) => {
+      i.setAttribute("style", `left: ${-offset}px`);
+    });
+    // 슬라이드 이동 시 현재 활성화된 pagination 변경
+    paginationItems.forEach((i) => i.classList.remove("active"));
+    paginationItems[currSlide - 1].classList.add("active");
+  });
+}
+
+// 드래그(스와이프) 이벤트를 위한 변수 초기화
+let startPoint = 0;
+let endPoint = 0;
+
+// PC 클릭 이벤트 (드래그)
+slide.addEventListener("mousedown", (e) => {
+  startPoint = e.pageX; // 마우스 드래그 시작 위치 저장
+});
+
+slide.addEventListener("mouseup", (e) => {
+  endPoint = e.pageX; // 마우스 드래그 끝 위치 저장
+  if (startPoint < endPoint) {
+    // 마우스가 오른쪽으로 드래그 된 경우
+    prevMove();
+  } else if (startPoint > endPoint) {
+    // 마우스가 왼쪽으로 드래그 된 경우
+    nextMove();
+  }
+});
+
+// 모바일 터치 이벤트 (스와이프)
+slide.addEventListener("touchstart", (e) => {
+  startPoint = e.touches[0].pageX; // 터치가 시작되는 위치 저장
+});
+slide.addEventListener("touchend", (e) => {
+  endPoint = e.changedTouches[0].pageX; // 터치가 끝나는 위치 저장
+  if (startPoint < endPoint) {
+    // 오른쪽으로 스와이프 된 경우
+    prevMove();
+  } else if (startPoint > endPoint) {
+    // 왼쪽으로 스와이프 된 경우
+    nextMove();
+  }
+});
+
+// 기본적으로 슬라이드 루프 시작하기
+let loopInterval = setInterval(() => {
+  nextMove();
+}, 5000); //슬라이드 속도
+
+
+// 슬라이드에 마우스가 올라간 경우 루프 멈추기
+pagination.addEventListener("mouseover", () => {
+  clearInterval(loopInterval);
+});
+
+// 슬라이드에서 마우스가 나온 경우 루프 재시작하기
+pagination.addEventListener("mouseout", () => {
+  loopInterval = setInterval(() => {
+    nextMove();
+  }, 5000); //슬라이드 속도
+});
+
+        </script>
+    </body>
+</body>
+</html>
